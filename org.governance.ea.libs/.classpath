@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
+	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
+	<classpathentry exported="true" kind="lib" path="antlr-2.7.7.jar"/>
+	<classpathentry exported="true" kind="lib" path="asm-4.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="asm-analysis-4.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="asm-commons-4.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="asm-tree-4.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="asm-util-4.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="commons-cli-1.2.jar"/>
+	<classpathentry exported="true" kind="lib" path="commons-codec-1.6.jar"/>
+	<classpathentry exported="true" kind="lib" path="commons-logging-1.1.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="groovy-2.0.4.jar"/>
+	<classpathentry exported="true" kind="lib" path="groovy-xml-2.0.4.jar"/>
+	<classpathentry exported="true" kind="lib" path="httpclient-4.2.2.jar"/>
+	<classpathentry exported="true" kind="lib" path="httpcore-4.2.2.jar"/>
+	<classpathentry exported="true" kind="lib" path="log4j-1.2.17.jar"/>
+	<classpathentry exported="true" kind="lib" path="slf4j-api-1.7.2.jar"/>
+	<classpathentry exported="true" kind="lib" path="soa-model-core-1.4.1.4.jar"/>
+	<classpathentry exported="true" kind="lib" path="soa-model-distribution-1.4.1.4.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

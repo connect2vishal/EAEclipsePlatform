@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?pde version="3.5"?>
 
-<product name="Enterprise Architecture System" uid="org.governance.ea.product" id="org.governance.ea.product" application="org.eclipse.e4.ui.workbench.swt.E4Application" version="1.0.0" useFeatures="true" includeLaunchers="true">
+<product name="Enterprise Architecture System" uid="org.governance.ea.product" id="org.governance.ea.product" application="org.eclipse.e4.ui.workbench.swt.E4Application" version="1.0.2" useFeatures="true" includeLaunchers="true">
 
    <configIni use="default">
    </configIni>

@@ -18,15 +18,24 @@
          point="org.eclipse.core.runtime.products">
       <product
             application="org.eclipse.e4.ui.workbench.swt.E4Application"
-            name="Enterprise Architecture Platform">
+            description="Enterprise Architecture Platform"
+            name="EAPlatform">
+         <property
+               name="appName"
+               value="EAPlatform">
+         </property>
       </product>
    </extension>
    <extension
-         id="eaplatform"
+         id="EA_Platform"
          point="org.eclipse.core.runtime.products">
       <product
-            application="org.eclipse.ant.core.antRunner"
-            name="Enterprise Architecture Platform">
+            application="org.eclipse.e4.ui.workbench.swt.E4Application"
+            name="EAPlatform">
+         <property
+               name="appName"
+               value="EAPlatform">
+         </property>
       </product>
    </extension>
 

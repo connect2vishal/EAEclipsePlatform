@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?pde version="3.5"?>
 
-<product name="Enterprise Architecture Platform" uid="org.governance.ea.platform.product" id="org.governance.ea.platform.setting.eaplatform" application="org.eclipse.ant.core.antRunner" version="1.0.0" useFeatures="true" includeLaunchers="true">
+<product name="EAPlatform" uid="org.governance.ea.platform.product" id="org.governance.ea.platform.EAPlatform" application="org.eclipse.e4.ui.workbench.swt.E4Application" version="1.0.0" useFeatures="true" includeLaunchers="true">
 
    <configIni use="default">
    </configIni>
@@ -14,7 +14,7 @@
    </launcherArgs>
 
    <splash
-      location="org.governance.ea.platform.setting" />
+      location="org.governance.ea.platform" />
    <launcher>
       <solaris/>
       <win useIco="false">
@@ -27,13 +27,6 @@
 
    <plugins>
    </plugins>
-
-   <features>
-      <feature id="org.governance.ea.soa.feature"/>
-      <feature id="org.eclipse.e4.rcp"/>
-      <feature id="org.eclipse.emf.ecore"/>
-      <feature id="org.eclipse.emf.common"/>
-   </features>
 
    <configurations>
       <plugin id="org.eclipse.core.runtime" autoStart="true" startLevel="0" />

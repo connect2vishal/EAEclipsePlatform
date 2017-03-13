@@ -25,5 +25,24 @@
             productId="org.governance.ea.soa.product">
       </splashHandlerProductBinding>
    </extension>
+  <extension
+        point="org.eclipse.ui.perspectiveExtensions">
+     <perspectiveExtension
+           targetID="*">
+     </perspectiveExtension>
+  </extension>
+  <extension
+        point="org.eclipse.ui.perspectives">
+     <perspective
+           class="org.governance.ea.platform.perspective.DefaultPerspectiveFactory"
+           id="org.governance.ea.platform.perspective.DefaultPerspective"
+           name="Default Perspective">
+     </perspective>
+     <perspective
+           class="org.governance.ea.platform.perspective.EAPerspective"
+           id="org.governance.ea.platform.perspective.EAPerspective"
+           name="EA Perspective">
+     </perspective>
+  </extension>
 
 </plugin>

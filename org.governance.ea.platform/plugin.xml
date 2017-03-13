@@ -2,7 +2,19 @@
 <?eclipse version="3.4"?>
 <plugin>
 
-   <extension
+    <extension
+         id="product"
+         point="org.eclipse.core.runtime.products">
+      <product
+            application="org.eclipse.e4.ui.workbench.swt.E4Application"
+            name="ea-platform">
+         <property
+               name="appName"
+               value="ea-platform">
+         </property>
+      </product>
+   </extension>
+  <extension
          point="org.eclipse.ui.splashHandlers">
       <splashHandler
             class="org.governance.ea.platform.setting.splashHandlers.InteractiveSplashHandler"
@@ -12,31 +24,6 @@
             splashId="org.governance.ea.platform.setting.splashHandlers.interactive"
             productId="org.governance.ea.soa.product">
       </splashHandlerProductBinding>
-   </extension>
-   <extension
-         id="EAPlatform"
-         point="org.eclipse.core.runtime.products">
-      <product
-            application="org.eclipse.e4.ui.workbench.swt.E4Application"
-            description="Enterprise Architecture Platform"
-            name="EAPlatform">
-         <property
-               name="appName"
-               value="EAPlatform">
-         </property>
-      </product>
-   </extension>
-   <extension
-         id="EA_Platform"
-         point="org.eclipse.core.runtime.products">
-      <product
-            application="org.eclipse.e4.ui.workbench.swt.E4Application"
-            name="EAPlatform">
-         <property
-               name="appName"
-               value="EAPlatform">
-         </property>
-      </product>
    </extension>
 
 </plugin>

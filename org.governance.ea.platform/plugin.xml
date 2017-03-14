@@ -44,5 +44,13 @@
            name="EA Perspective">
      </perspective>
   </extension>
+  <extension
+        point="org.eclipse.ui.views">
+     <view
+           class="org.governance.ea.platform.parts.soa.WSDLAnalyzerPartView"
+           id="org.governance.ea.platform.parts.soa.WSDLAnalyzerPartView"
+           name="WSDL Nalayzer">
+     </view>
+  </extension>
 
 </plugin>

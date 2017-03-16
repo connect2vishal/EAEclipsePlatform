@@ -29,6 +29,15 @@
         point="org.eclipse.ui.perspectiveExtensions">
      <perspectiveExtension
            targetID="*">
+        <view
+              closeable="true"
+              id="org.governance.ea.platform.parts.soa.WSDLAnalyzerPartView"
+              minimized="false"
+              moveable="false"
+              relationship="stack"
+              showTitle="true"
+              visible="true">
+        </view>
      </perspectiveExtension>
   </extension>
   <extension
@@ -51,6 +60,18 @@
            id="org.governance.ea.platform.parts.soa.WSDLAnalyzerPartView"
            name="WSDL Nalayzer">
      </view>
+  </extension>
+  <extension
+        id="id1"
+        point="org.eclipse.core.runtime.applications">
+     <application
+           cardinality="singleton-global"
+           thread="main"
+           visible="true">
+        <run
+              class="org.governance.ea.platform.Application">
+        </run>
+     </application>
   </extension>
 
 </plugin>

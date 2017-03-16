@@ -4,7 +4,7 @@
     <children xsi:type="advanced:PerspectiveStack" xmi:id="_ZVP3YAg1Eee9W6cSAGbzdQ" elementId="org.governance.ea.platform.perspectivestack.EAPerspectiveStack">
       <children xsi:type="advanced:Perspective" xmi:id="_pnCD0Ag1Eee9W6cSAGbzdQ" elementId="org.governance.ea.platform.perspective.EAPerpective" accessibilityPhrase="EA Perpective" label="EA Perpective" tooltip="EA Perpective">
         <children xsi:type="basic:PartSashContainer" xmi:id="_b4SRQAj4Eee9W6cSAGbzdQ" elementId="org.governance.ea.platform.partsashcontainer.0">
-          <children xsi:type="basic:Part" xmi:id="_8M9SgAj4Eee9W6cSAGbzdQ" elementId="org.governance.ea.platform.part.0"/>
+          <children xsi:type="basic:Part" xmi:id="_8M9SgAj4Eee9W6cSAGbzdQ" elementId="org.governance.ea.platform.part.wsdlanalyzerpartview" accessibilityPhrase="WSDLAnalyzerPartView" contributionURI="bundleclass://org.governance.ea.platform/org.governance.ea.platform.parts.soa.WSDLAnalyzerPartView" label="WSDLAnalyzerPartView" tooltip="WSDL Analyzer View" closeable="true"/>
         </children>
       </children>
       <children xsi:type="advanced:Perspective" xmi:id="_WuQ9EAjwEee9W6cSAGbzdQ" elementId="org.governance.ea.platform.perspective.DefaultPerspective" accessibilityPhrase="Default Perspective" label="Default Perspective" tooltip="Default Perspective"/>

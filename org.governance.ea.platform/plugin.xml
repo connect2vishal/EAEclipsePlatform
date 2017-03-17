@@ -6,7 +6,7 @@
          id="product"
          point="org.eclipse.core.runtime.products">
       <product
-            application="org.eclipse.e4.ui.workbench.swt.E4Application"
+            application="org.governance.ea.platform.EAPlatformApplication"
             name="ea-platform">
          <property
                name="appName"
@@ -62,14 +62,14 @@
      </view>
   </extension>
   <extension
-        id="id1"
+        id="EAPlatformApplication"
         point="org.eclipse.core.runtime.applications">
      <application
            cardinality="singleton-global"
            thread="main"
            visible="true">
         <run
-              class="org.governance.ea.platform.Application">
+              class="org.eclipse.e4.ui.internal.workbench.swt.E4Application">
         </run>
      </application>
   </extension>

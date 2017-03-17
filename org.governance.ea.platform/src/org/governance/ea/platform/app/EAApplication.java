@@ -1,20 +1,39 @@
 package org.governance.ea.platform.app;
 
+import org.eclipse.e4.ui.internal.workbench.swt.E4Application;
 import org.eclipse.equinox.app.IApplication;
 import org.eclipse.equinox.app.IApplicationContext;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.ui.IWorkbench;
+import org.eclipse.ui.PlatformUI;
 
-public class EAApplication implements IApplication {
+public class EAApplication extends E4Application implements IApplication {
 
 	@Override
-	public Object start(IApplicationContext context) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+	public Object start(IApplicationContext context) {
+		Display display = PlatformUI.createDisplay();
+		try {
+			int returnCode = PlatformUI.createAndRunWorkbench(display, new ApplicationWorkbenchAdvisor());
+			if (returnCode == PlatformUI.RETURN_RESTART) {
+				return IApplication.EXIT_RESTART;
+			}
+			return IApplication.EXIT_OK;
+		} finally {
+			display.dispose();
+		}
 	}
 
 	@Override
 	public void stop() {
-		// TODO Auto-generated method stub
-
+		if (!PlatformUI.isWorkbenchRunning())
+			return;
+		final IWorkbench workbench = PlatformUI.getWorkbench();
+		final Display display = workbench.getDisplay();
+		display.syncExec(new Runnable() {
+			public void run() {
+				if (!display.isDisposed())
+					workbench.close();
+			}
+		});
 	}
-
 }

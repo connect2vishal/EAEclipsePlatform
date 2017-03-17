@@ -14,6 +14,16 @@
       <children xsi:type="menu:Menu" xmi:id="_E0-8cAjyEee9W6cSAGbzdQ" elementId="org.governance.ea.platform.menu.soa" label="SOA">
         <children xsi:type="menu:HandledMenuItem" xmi:id="_J5VAEAjyEee9W6cSAGbzdQ" elementId="org.governance.ea.platform.handledmenuitem.wsdlanalyzer" label="WSDL Analyzer" iconURI="platform:/plugin/org.governance.ea.platform/Sample.png" tooltip="WSDL Analyzer" command="_CHb7oAjzEee9W6cSAGbzdQ"/>
       </children>
+      <children xsi:type="menu:Menu" xmi:id="_Www0EAs4EeemnMpntkCxFg" elementId="org.governance.ea.platform.menu.perspectives" label="Perspectives">
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_ZIx0UAs4EeemnMpntkCxFg" elementId="org.governance.ea.platform.handledmenuitem.soaperspective" label="SOA Perspective" tooltip="SOA Perspective"/>
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_cVNUEAs4EeemnMpntkCxFg" elementId="org.governance.ea.platform.handledmenuitem.arbperspective" label="ARB Perspective" tooltip="ARB Perspective"/>
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_fnuNsAs4EeemnMpntkCxFg" elementId="org.governance.ea.platform.handledmenuitem.defualtperspective" label="Defualt Perspective"/>
+      </children>
+      <children xsi:type="menu:Menu" xmi:id="_su8ioAs4EeemnMpntkCxFg" elementId="org.governance.ea.platform.menu.help" label="Help">
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_ueAsgAs4EeemnMpntkCxFg" elementId="org.governance.ea.platform.handledmenuitem.welcome" label="Welcome" tooltip="Welcome"/>
+        <children xsi:type="menu:MenuSeparator" xmi:id="_x2QasAs4EeemnMpntkCxFg" elementId="org.governance.ea.platform.menuseparator.0"/>
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_ymPGIAs4EeemnMpntkCxFg" elementId="org.governance.ea.platform.handledmenuitem.abouteaplatform" label="About EA Platform" tooltip="About EA Platform"/>
+      </children>
     </mainMenu>
     <trimBars xmi:id="_SvKbgAj2Eee9W6cSAGbzdQ" elementId="org.governance.ea.platform.trimbar.ToolBars" accessibilityPhrase="ToolBars">
       <children xsi:type="menu:ToolBar" xmi:id="_nS3JEAj2Eee9W6cSAGbzdQ" elementId="org.governance.ea.platform.toolbar.soatoolbar" accessibilityPhrase="SOA Toolbar">

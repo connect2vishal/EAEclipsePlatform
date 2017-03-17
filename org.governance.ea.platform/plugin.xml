@@ -6,7 +6,7 @@
          id="product"
          point="org.eclipse.core.runtime.products">
       <product
-            application="org.governance.ea.platform.EAPlatformApplication"
+            application="org.eclipse.e4.ui.workbench.swt.E4Application"
             name="ea-platform">
          <property
                name="appName"

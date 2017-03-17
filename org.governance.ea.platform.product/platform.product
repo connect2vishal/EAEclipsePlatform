@@ -3,6 +3,7 @@
 
 <product name="ea-platform" id="org.governance.ea.platform.product" application="org.eclipse.e4.ui.workbench.swt.E4Application" useFeatures="true" includeLaunchers="true">
 
+
    <configIni use="default">
    </configIni>
 
@@ -24,7 +25,9 @@
       </win>
    </launcher>
 
+
    <vm>
+      <macos include="false">org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8</macos>
    </vm>
 
    <plugins>
@@ -32,9 +35,9 @@
 
    <features>
       <feature id="org.governance.ea.platform.feature"/>
-      <feature id="org.eclipse.e4.rcp"/>
       <feature id="org.eclipse.emf.ecore"/>
       <feature id="org.eclipse.emf.common"/>
+      <feature id="org.eclipse.e4.rcp"/>
    </features>
 
    <configurations>

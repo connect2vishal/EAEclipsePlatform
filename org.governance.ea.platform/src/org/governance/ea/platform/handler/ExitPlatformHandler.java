@@ -11,6 +11,7 @@ public class ExitPlatformHandler {
 	
 	@Execute
     public void execute(IWorkbench workbench) {
+		System.out.println();
             workbench.close();
     }
 }

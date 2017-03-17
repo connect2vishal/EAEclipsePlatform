@@ -12,6 +12,10 @@
                name="appName"
                value="ea-platform">
          </property>
+         <property
+               name="applicationXMI"
+               value="org.governance.ea.platform/Application.e4xmi">
+         </property>
       </product>
    </extension>
   <extension

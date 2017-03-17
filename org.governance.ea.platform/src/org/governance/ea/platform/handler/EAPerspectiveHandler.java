@@ -13,7 +13,7 @@ public class EAPerspectiveHandler {
        
 		System.out.println("EA Perspective Handler Started !!!");
         
-       MPerspective element = (MPerspective) modelService.find("EAPerpective", app);
+       MPerspective element = (MPerspective) modelService.find("org.governance.ea.platform.perspective.EAPerpective", app);
         // now switch perspective
         partService.switchPerspective(element);
         

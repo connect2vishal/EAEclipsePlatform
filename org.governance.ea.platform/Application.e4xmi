@@ -6,15 +6,20 @@
       <children xsi:type="advanced:Perspective" xmi:id="_WuQ9EAjwEee9W6cSAGbzdQ" elementId="org.governance.ea.platform.perspective.DefaultPerspective" accessibilityPhrase="Default Perspective" label="Default Perspective" tooltip="Default Perspective"/>
     </children>
     <mainMenu xmi:id="_wcy7UAjxEee9W6cSAGbzdQ" elementId="org.governance.ea.platform.menu.0">
-      <children xsi:type="menu:Menu" xmi:id="_xgraMAjxEee9W6cSAGbzdQ" elementId="org.governance.ea.platform.menu.file" label="File"/>
+      <children xsi:type="menu:Menu" xmi:id="_xgraMAjxEee9W6cSAGbzdQ" elementId="org.governance.ea.platform.menu.file" label="File">
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_IGT5YAtaEeeKbYJq9qSgQw" elementId="org.governance.ea.platform.handledmenuitem.exit" label="Exit" tooltip="Exit"/>
+      </children>
       <children xsi:type="menu:Menu" xmi:id="_E0-8cAjyEee9W6cSAGbzdQ" elementId="org.governance.ea.platform.menu.soa" label="SOA">
         <children xsi:type="menu:HandledMenuItem" xmi:id="_J5VAEAjyEee9W6cSAGbzdQ" elementId="org.governance.ea.platform.handledmenuitem.wsdlanalyzer" label="WSDL Analyzer" iconURI="platform:/plugin/org.governance.ea.platform/Sample.png" tooltip="WSDL Analyzer" command="_CHb7oAjzEee9W6cSAGbzdQ"/>
       </children>
-      <children xsi:type="menu:Menu" xmi:id="_Www0EAs4EeemnMpntkCxFg" elementId="org.governance.ea.platform.menu.perspectives" label="Perspectives">
-        <children xsi:type="menu:HandledMenuItem" xmi:id="_ZIx0UAs4EeemnMpntkCxFg" elementId="org.governance.ea.platform.handledmenuitem.soaperspective" label="SOA Perspective" tooltip="SOA Perspective"/>
-        <children xsi:type="menu:HandledMenuItem" xmi:id="_cVNUEAs4EeemnMpntkCxFg" elementId="org.governance.ea.platform.handledmenuitem.arbperspective" label="ARB Perspective" tooltip="ARB Perspective"/>
-        <children xsi:type="menu:HandledMenuItem" xmi:id="_fnuNsAs4EeemnMpntkCxFg" elementId="org.governance.ea.platform.handledmenuitem.defualtperspective" label="Defualt Perspective"/>
-        <children xsi:type="menu:HandledMenuItem" xmi:id="_Tu5HEAtPEees9PVKSRCDhA" elementId="org.governance.ea.platform.handledmenuitem.eaperspective" label="EA Perspective" iconURI="" tooltip="EA Perspective" command="_plGlYAtPEees9PVKSRCDhA"/>
+      <children xsi:type="menu:Menu" xmi:id="_G-NJMAtXEeemnMpntkCxFg" elementId="org.governance.ea.platform.menu.window" label="Window" tooltip="Window">
+        <children xsi:type="menu:Menu" xmi:id="_9_SQ8AtXEeemnMpntkCxFg" elementId="org.governance.ea.platform.menu.showviewmenu" label="Show View" tooltip="Show View"/>
+        <children xsi:type="menu:Menu" xmi:id="_Www0EAs4EeemnMpntkCxFg" elementId="org.governance.ea.platform.menu.perspectives" label="Perspectives" tooltip="Perspectives">
+          <children xsi:type="menu:HandledMenuItem" xmi:id="_ZIx0UAs4EeemnMpntkCxFg" elementId="org.governance.ea.platform.handledmenuitem.soaperspectivemenu" label="SOA Perspective" tooltip="SOA Perspective"/>
+          <children xsi:type="menu:HandledMenuItem" xmi:id="_cVNUEAs4EeemnMpntkCxFg" elementId="org.governance.ea.platform.handledmenuitem.arbperspectivemenu" label="ARB Perspective" tooltip="ARB Perspective"/>
+          <children xsi:type="menu:HandledMenuItem" xmi:id="_fnuNsAs4EeemnMpntkCxFg" elementId="org.governance.ea.platform.handledmenuitem.defualtperspectivemenu" label="Defualt Perspective"/>
+          <children xsi:type="menu:HandledMenuItem" xmi:id="_Tu5HEAtPEees9PVKSRCDhA" elementId="org.governance.ea.platform.handledmenuitem.eaperspectivemenu" label="EA Perspective" iconURI="" tooltip="EA Perspective" command="_plGlYAtPEees9PVKSRCDhA"/>
+        </children>
       </children>
       <children xsi:type="menu:Menu" xmi:id="_su8ioAs4EeemnMpntkCxFg" elementId="org.governance.ea.platform.menu.help" label="Help">
         <children xsi:type="menu:HandledMenuItem" xmi:id="_ueAsgAs4EeemnMpntkCxFg" elementId="org.governance.ea.platform.handledmenuitem.welcome" label="Welcome" tooltip="Welcome"/>
@@ -29,9 +34,11 @@
     </trimBars>
   </children>
   <handlers xmi:id="_KNn_oAjzEee9W6cSAGbzdQ" elementId="org.governance.ea.platform.handler.wsdlanalyzer" contributionURI="bundleclass://org.governance.ea.platform/org.governance.ea.platform.handler.WSDLAnalyzerHandler" command="_CHb7oAjzEee9W6cSAGbzdQ"/>
-  <handlers xmi:id="_IvLbwAtQEees9PVKSRCDhA" elementId="org.governance.ea.platform.handler.SwitchPerspectiveHandler" contributionURI="bundleclass://org.governance.ea.platform/org.governance.ea.platform.perspective.handler.SwitchPerspectiveHandler" command="_plGlYAtPEees9PVKSRCDhA"/>
-  <commands xmi:id="_CHb7oAjzEee9W6cSAGbzdQ" elementId="org.governance.ea.platform.command.wsdlanalyzer" commandName="WSDL Analyzer"/>
-  <commands xmi:id="_plGlYAtPEees9PVKSRCDhA" elementId="org.governance.ea.platform.command.EAPerspectiveSwitchCommand" commandName="EAPerspectiveSwitchCommand" description="EA Perspective Switch Command"/>
+  <handlers xmi:id="_IvLbwAtQEees9PVKSRCDhA" elementId="org.governance.ea.platform.handler.EAPerspectiveHandler" contributionURI="bundleclass://org.governance.ea.platform/org.governance.ea.platform.handler.EAPerspectiveHandler" command="_plGlYAtPEees9PVKSRCDhA"/>
+  <handlers xmi:id="_lpWggAtaEeeKbYJq9qSgQw" elementId="org.governance.ea.platform.handler.Exit" contributionURI="bundleclass://org.governance.ea.platform/org.governance.ea.platform.handler.ExitPlatformHandler" command="_QiSxwAtbEeeKbYJq9qSgQw"/>
+  <commands xmi:id="_CHb7oAjzEee9W6cSAGbzdQ" elementId="org.governance.ea.platform.command.wsdlanalyzercommand" commandName="WSDLAnalyzerCommand" description="WSDL Analyzer Command"/>
+  <commands xmi:id="_plGlYAtPEees9PVKSRCDhA" elementId="org.governance.ea.platform.command.EAPerspectiveCommand" commandName="EAPerspectiveCommand" description="EA Perspective Command"/>
+  <commands xmi:id="_QiSxwAtbEeeKbYJq9qSgQw" elementId="org.governance.ea.platform.command.exitplatformcommand" commandName="ExitPlatformCommand"/>
   <addons xmi:id="_eNd80QgwEee9W6cSAGbzdQ" elementId="org.eclipse.e4.core.commands.service" contributionURI="bundleclass://org.eclipse.e4.core.commands/org.eclipse.e4.core.commands.CommandServiceAddon"/>
   <addons xmi:id="_eNd80ggwEee9W6cSAGbzdQ" elementId="org.eclipse.e4.ui.contexts.service" contributionURI="bundleclass://org.eclipse.e4.ui.services/org.eclipse.e4.ui.services.ContextServiceAddon"/>
   <addons xmi:id="_eNd80wgwEee9W6cSAGbzdQ" elementId="org.eclipse.e4.ui.bindings.service" contributionURI="bundleclass://org.eclipse.e4.ui.bindings/org.eclipse.e4.ui.bindings.BindingServiceAddon"/>

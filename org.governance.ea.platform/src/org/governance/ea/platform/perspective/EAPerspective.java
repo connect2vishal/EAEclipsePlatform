@@ -13,10 +13,9 @@ public class EAPerspective implements IPerspectiveFactory {
 		addFastViews(layout);
 		addViewShortcuts(layout);
 		addPerspectiveShortcuts(layout);
-		layout.addView("org.eclipse.ui.views.ProgressView", IPageLayout.BOTTOM, 0.5f, IPageLayout.ID_EDITOR_AREA);
-		layout.addView("org.eclipse.ui.views.ContentOutline", IPageLayout.RIGHT, 0.5f, IPageLayout.ID_EDITOR_AREA);
-		layout.addView("org.eclipse.ui.views.ResourceNavigator", IPageLayout.LEFT, 0.5f, IPageLayout.ID_EDITOR_AREA);
-		layout.addView("org.eclipse.ui.console.ConsoleView", IPageLayout.LEFT, 0.5f, "org.eclipse.ui.views.ProgressView");
+		layout.addView("org.governance.ea.platform.parts.soa.WSDLAnalyzerPartView", IPageLayout.LEFT, 0.33f, IPageLayout.ID_EDITOR_AREA);
+		layout.addView("org.governance.ea.platform.parts.soa.EANavigatorPartView", IPageLayout.RIGHT, 0.5f, IPageLayout.ID_EDITOR_AREA);
+		layout.addView("org.governance.ea.platform.parts.soa.SOAEditorPartView", IPageLayout.BOTTOM, 0.5f, IPageLayout.ID_EDITOR_AREA);
 	}
 
 	/**

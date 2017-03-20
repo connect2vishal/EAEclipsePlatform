@@ -60,9 +60,9 @@
   <extension
         point="org.eclipse.ui.views">
      <view
-           class="org.governance.ea.platform.parts.soa.WSDLAnalyzerPartView"
+           class="org.governance.ea.platform.perspective.parts.sample.soa.WSDLAnalyzerPartView"
            id="org.governance.ea.platform.parts.soa.WSDLAnalyzerPartView"
-           name="WSDL Nalayzer">
+           name="WSDL Anlayzer">
      </view>
   </extension>
   <extension
@@ -76,6 +76,14 @@
               class="org.eclipse.e4.ui.internal.workbench.swt.E4Application">
         </run>
      </application>
+  </extension>
+  <extension
+        point="org.eclipse.ui.editors">
+     <editor
+           class="org.governance.ea.platform.perspective.parts.sample.soa.SOAEditorPartView"
+           id="org.governance.ea.platform.perspective.parts.SOAEditorPartView"
+           name="SOA EditorPart View">
+     </editor>
   </extension>
 
 </plugin>

@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="ASCII"?>
 <application:Application xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:advanced="http://www.eclipse.org/ui/2010/UIModel/application/ui/advanced" xmlns:application="http://www.eclipse.org/ui/2010/UIModel/application" xmlns:basic="http://www.eclipse.org/ui/2010/UIModel/application/ui/basic" xmlns:menu="http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" xmi:id="_eNd80AgwEee9W6cSAGbzdQ" elementId="org.governance.ea.platform.application">
   <children xsi:type="basic:TrimmedWindow" xmi:id="_nwt0sAgwEee9W6cSAGbzdQ" elementId="org.governance.ea.platform.trimmedwindow.EAPlatform" label="Enterprise Architect Platform">
-    <children xsi:type="advanced:PerspectiveStack" xmi:id="_ZVP3YAg1Eee9W6cSAGbzdQ" elementId="org.governance.ea.platform.perspectivestack.EAPerspectiveStack">
-      <children xsi:type="advanced:Perspective" xmi:id="_pnCD0Ag1Eee9W6cSAGbzdQ" elementId="org.governance.ea.platform.perspective.EAPerpective" accessibilityPhrase="EAPerpective" label="EA Perpective" tooltip="EA Perpective"/>
-      <children xsi:type="advanced:Perspective" xmi:id="_WuQ9EAjwEee9W6cSAGbzdQ" elementId="org.governance.ea.platform.perspective.DefaultPerspective" accessibilityPhrase="Default Perspective" label="Default Perspective" tooltip="Default Perspective"/>
+    <children xsi:type="advanced:PerspectiveStack" xmi:id="_recg4A2lEeeEr9LGzhZ7bg" elementId="org.governance.ea.platform.perspectivestack.defaultperspectivestack">
+      <children xsi:type="advanced:Perspective" xmi:id="_tHpTUA2lEeeEr9LGzhZ7bg" elementId="org.governance.ea.platform.perspective.eaperspective" label="EAPerspective">
+        <children xsi:type="basic:PartStack" xmi:id="_G_y9EA2mEeeEr9LGzhZ7bg" elementId="org.governance.ea.platform.partstack.overviewpartstack">
+          <children xsi:type="basic:Part" xmi:id="_HslKkA2mEeeEr9LGzhZ7bg" elementId="org.governance.ea.platform.part.overview" label="Overview"/>
+        </children>
+      </children>
     </children>
     <mainMenu xmi:id="_wcy7UAjxEee9W6cSAGbzdQ" elementId="org.governance.ea.platform.menu.0">
       <children xsi:type="menu:Menu" xmi:id="_xgraMAjxEee9W6cSAGbzdQ" elementId="org.governance.ea.platform.menu.file" label="File">
@@ -30,6 +33,9 @@
     <trimBars xmi:id="_SvKbgAj2Eee9W6cSAGbzdQ" elementId="org.governance.ea.platform.trimbar.ToolBars" accessibilityPhrase="ToolBars">
       <children xsi:type="menu:ToolBar" xmi:id="_nS3JEAj2Eee9W6cSAGbzdQ" elementId="org.governance.ea.platform.toolbar.soatoolbar" accessibilityPhrase="SOA Toolbar">
         <children xsi:type="menu:HandledToolItem" xmi:id="_wMCwQAj2Eee9W6cSAGbzdQ" elementId="org.governance.ea.platform.handledtoolitem.wsdlanalyzer" label="WSDL Analyzer" iconURI="platform:/plugin/org.governance.ea.platform/Sample.png" command="_CHb7oAjzEee9W6cSAGbzdQ"/>
+      </children>
+      <children xsi:type="menu:ToolBar" xmi:id="_yTLLwA2fEeeEr9LGzhZ7bg" elementId="org.governance.ea.platform.toolbar." accessibilityPhrase="">
+        <children xsi:type="menu:ToolBarSeparator" xmi:id="_PYemoA2jEeeEr9LGzhZ7bg" elementId="org.governance.ea.platform.toolbarseparator.0"/>
       </children>
     </trimBars>
   </children>

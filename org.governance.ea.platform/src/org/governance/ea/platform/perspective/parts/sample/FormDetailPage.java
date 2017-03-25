@@ -1,5 +1,7 @@
 package org.governance.ea.platform.perspective.parts.sample;
 
+import javax.annotation.PostConstruct;
+
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.swt.SWT;
@@ -11,17 +13,18 @@ import org.eclipse.ui.forms.IManagedForm;
 import org.eclipse.ui.forms.widgets.ExpandableComposite;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.ui.forms.widgets.Section;
+import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Text;
+import org.eclipse.swt.layout.GridData;
 
 public class FormDetailPage implements IDetailsPage {
+	public FormDetailPage() {
+	}
 
 	private IManagedForm managedForm;
-
-	/**
-	 * Create the details page.
-	 */
-	public FormDetailPage() {
-		// Create the details page
-	}
+	private Text text;
+	private Text text_1;
 
 	/**
 	 * Initialize the details page.
@@ -35,6 +38,7 @@ public class FormDetailPage implements IDetailsPage {
 	 * Create contents of the details page.
 	 * @param parent
 	 */
+	@PostConstruct
 	public void createContents(Composite parent) {
 		FormToolkit toolkit = managedForm.getToolkit();
 		parent.setLayout(new FillLayout());
@@ -45,6 +49,28 @@ public class FormDetailPage implements IDetailsPage {
 		Composite composite = toolkit.createComposite(sctnWelcome, SWT.NONE);
 		toolkit.paintBordersFor(composite);
 		sctnWelcome.setClient(composite);
+		composite.setLayout(new GridLayout(3, false));
+		
+		Label lblName = new Label(composite, SWT.NONE);
+		GridData gd_lblName = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
+		gd_lblName.widthHint = 109;
+		lblName.setLayoutData(gd_lblName);
+		toolkit.adapt(lblName, true, true);
+		lblName.setText("Name : ");
+		new Label(composite, SWT.NONE);
+		
+		text = new Text(composite, SWT.BORDER);
+		text.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		toolkit.adapt(text, true, true);
+		
+		Label lblClass = new Label(composite, SWT.NONE);
+		toolkit.adapt(lblClass, true, true);
+		lblClass.setText("Class : ");
+		new Label(composite, SWT.NONE);
+		
+		text_1 = new Text(composite, SWT.BORDER);
+		text_1.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		toolkit.adapt(text_1, true, true);
 	}
 
 	public void dispose() {

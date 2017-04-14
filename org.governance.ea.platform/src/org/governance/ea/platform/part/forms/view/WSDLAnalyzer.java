@@ -4,11 +4,14 @@ package org.governance.ea.platform.part.forms.view;
 import javax.annotation.PostConstruct;
 
 import org.eclipse.e4.ui.di.Focus;
-import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.ColumnLabelProvider;
+import org.eclipse.jface.viewers.IStructuredContentProvider;
+import org.eclipse.jface.viewers.ITableLabelProvider;
+import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
+import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
@@ -24,12 +27,35 @@ import org.eclipse.ui.forms.widgets.Section;
 import org.eclipse.wb.swt.SWTResourceManager;
 
 public class WSDLAnalyzer{
-    public static final String ID = "org.governance.ea.platform.part.forms.wsdlanalyzer";
-
-    private TableViewer viewer;
-    // static fields to hold the images
-    private static final ImageDescriptor CHECKED = null;//getImageDescriptor("checked.gif");
-    private static final ImageDescriptor UNCHECKED = null;//getImageDescriptor("unchecked.gif");
+	private static class ContentProvider implements IStructuredContentProvider {
+		public Object[] getElements(Object inputElement) {
+			return new Object[0];
+		}
+		public void dispose() {
+		}
+		public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
+		}
+	}
+	private class TableLabelProvider extends LabelProvider implements ITableLabelProvider {
+		public Image getColumnImage(Object element, int columnIndex) {
+			return null;
+		}
+		public String getColumnText(Object element, int columnIndex) {
+			Person person = (Person) element;
+		    String text = "";
+		    switch (columnIndex) {
+		    case PersonConst.COLUMN_FIRST_NAME:
+		      text = person.getFirstName();
+		      break;
+		    case PersonConst.COLUMN_LAST_NAME:
+		      text = person.getLastName();
+		      break;		   
+		    }
+		    return text;
+		 }
+	}
+	
+    public static final String ID = "org.governance.ea.platform.part.forms.view.wsdlanalyzer";
     /**
      * This is a callback that will allow us to create the viewer and initialize
      * it.
@@ -40,96 +66,141 @@ public class WSDLAnalyzer{
             ScrolledForm form = toolkit.createScrolledForm(parent);
             toolkit.decorateFormHeading(form.getForm());
             form.setText("WSDL Analyzer");
-            form.getBody().setLayout(new GridLayout(2, false));
+            form.getBody().setLayout(null);
             
-            Label lblFolderPath = new Label(form.getBody(), SWT.NONE);
+            Section sctnNewSection = toolkit.createSection(form.getBody(), Section.TWISTIE | Section.TITLE_BAR);
+            sctnNewSection.setBounds(10, 4, 1076, 155);
+            toolkit.paintBordersFor(sctnNewSection);
+            sctnNewSection.setText("New Section");
+            sctnNewSection.setExpanded(true);
+            
+            Composite composite = new Composite(sctnNewSection, SWT.NONE);
+            toolkit.adapt(composite);
+            toolkit.paintBordersFor(composite);
+            sctnNewSection.setClient(composite);
+            composite.setLayout(new GridLayout(20, false));
+            
+            Label lblFolderPath = new Label(composite, SWT.NONE);
             toolkit.adapt(lblFolderPath, true, true);
             lblFolderPath.setText("Folder Path :");
-            new Label(form.getBody(), SWT.NONE);
             
-            Label lblNewLabel = toolkit.createLabel(form.getBody(), "Select Folder", SWT.NONE);
-            lblNewLabel.setBackground(SWTResourceManager.getColor(192, 192, 192));
+            Label lblNewLabel = toolkit.createLabel(composite, "Select Folder", SWT.NONE);
             GridData gd_lblNewLabel = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
-            gd_lblNewLabel.widthHint = 978;
+            gd_lblNewLabel.widthHint = 578;
             lblNewLabel.setLayoutData(gd_lblNewLabel);
+            lblNewLabel.setBackground(SWTResourceManager.getColor(192, 192, 192));
+            new Label(composite, SWT.NONE);
+            new Label(composite, SWT.NONE);
+            new Label(composite, SWT.NONE);
+            new Label(composite, SWT.NONE);
+            new Label(composite, SWT.NONE);
+            new Label(composite, SWT.NONE);
+            new Label(composite, SWT.NONE);
+            new Label(composite, SWT.NONE);
+            new Label(composite, SWT.NONE);
+            new Label(composite, SWT.NONE);
+            new Label(composite, SWT.NONE);
+            new Label(composite, SWT.NONE);
+            new Label(composite, SWT.NONE);
+            new Label(composite, SWT.NONE);
+            new Label(composite, SWT.NONE);
+            new Label(composite, SWT.NONE);
+            new Label(composite, SWT.NONE);
             
-            Button btnSelectFolder = toolkit.createButton(form.getBody(), "Select Folder", SWT.NONE);
-            new Label(form.getBody(), SWT.NONE);
-            new Label(form.getBody(), SWT.NONE);
+            Button btnSelectFolder = toolkit.createButton(composite, "Select Folder", SWT.NONE);
             
             Section sctnWsdlActions = toolkit.createSection(form.getBody(), Section.TWISTIE | Section.TITLE_BAR);
-            GridData gd_sctnWsdlActions = new GridData(SWT.LEFT, SWT.CENTER, false, false, 2, 1);
-            gd_sctnWsdlActions.widthHint = 1056;
-            sctnWsdlActions.setLayoutData(gd_sctnWsdlActions);
+            sctnWsdlActions.setBounds(10, 164, 1071, 69);
             toolkit.paintBordersFor(sctnWsdlActions);
             sctnWsdlActions.setText("WSDL Actions");
             sctnWsdlActions.setExpanded(true);
             
-            Composite composite = toolkit.createComposite(sctnWsdlActions, SWT.NONE);
-            toolkit.paintBordersFor(composite);
-            sctnWsdlActions.setClient(composite);
+            Composite wsdlActionComposite = toolkit.createComposite(sctnWsdlActions, SWT.NONE);
+            toolkit.paintBordersFor(wsdlActionComposite);
+            sctnWsdlActions.setClient(wsdlActionComposite);
+            wsdlActionComposite.setLayout(new GridLayout(1, false));
             
-            Button btnAnalyze = toolkit.createButton(composite, "Analyze", SWT.NONE);
-            btnAnalyze.setBounds(0, 10, 90, 30);
+            Button btnAnalyze = toolkit.createButton(wsdlActionComposite, "Analyze", SWT.NONE);
+            GridData gd_btnAnalyze = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
+            gd_btnAnalyze.widthHint = 147;
+            btnAnalyze.setLayoutData(gd_btnAnalyze);
             
             Section sctnAnalyzisView = toolkit.createSection(form.getBody(), Section.TWISTIE | Section.TITLE_BAR);
-            GridData gd_sctnAnalyzisView = new GridData(SWT.LEFT, SWT.CENTER, false, false, 2, 1);
-            gd_sctnAnalyzisView.widthHint = 183;
-            sctnAnalyzisView.setLayoutData(gd_sctnAnalyzisView);
+            sctnAnalyzisView.setBounds(10, 267, 1076, 512);
             toolkit.paintBordersFor(sctnAnalyzisView);
             sctnAnalyzisView.setText("Analyzis view");
             sctnAnalyzisView.setExpanded(true);
             
-            Composite composite_1 = toolkit.createComposite(sctnAnalyzisView, SWT.NONE);
-            toolkit.paintBordersFor(composite_1);
-            sctnAnalyzisView.setClient(composite_1);
+            Composite wsdlViewerComposite = toolkit.createComposite(sctnAnalyzisView, SWT.NONE);
+            toolkit.paintBordersFor(wsdlViewerComposite);
+            sctnAnalyzisView.setClient(wsdlViewerComposite);
             
-            table = toolkit.createTable(composite_1, SWT.NONE);
-            table.setBounds(10, 10, 85, 47);
+            TableViewer tableViewer = new TableViewer(wsdlViewerComposite, SWT.BORDER | SWT.FULL_SELECTION);
+            Table table = tableViewer.getTable();
+            table.setBounds(0, 0, 620, 396);
+            //table.setBounds(0,0,sctnAnalyzisView.getBounds().width,sctnAnalyzisView.getBounds().height);//0, 0, 620, 396);
+            //System.out.println("Size : "+sctnAnalyzisView.getBounds());
+            table.setHeaderVisible(true);
+            table.setLinesVisible(true);
             toolkit.paintBordersFor(table);
-            table.setHeaderVisible(true);
-            table.setLinesVisible(true);
+            
+            TableViewerColumn tvcFirstName = new TableViewerColumn(tableViewer, SWT.LEFT);
+            TableColumn tcFirstName = tvcFirstName.getColumn();
+            tcFirstName.setWidth(100);
+            tcFirstName.setText("FirstName");
+            
+            TableViewerColumn tvcLastName = new TableViewerColumn(tableViewer, SWT.NONE);
+            TableColumn tcLastName = tvcLastName.getColumn();
+            tcLastName.setWidth(100);
+            tcLastName.setText("Last Name");
+            
+             tableViewer.setLabelProvider(new TableLabelProvider());
+             tableViewer.setContentProvider(new ArrayContentProvider());
+             tableViewer.setInput(ModelProvider.INSTANCE.getPersons());
+           
+             // define layout for the viewer
+             GridData gridData = new GridData();
+             gridData.verticalAlignment = GridData.FILL;
+             gridData.horizontalSpan = 2;
+             gridData.grabExcessHorizontalSpace = true;
+             gridData.grabExcessVerticalSpace = true;
+             gridData.horizontalAlignment = GridData.FILL;
+             tableViewer.getControl().setLayoutData(gridData);
+             
+            //createViewer(parent, tableViewer);
+     }
+    
+    private void createViewer(Composite parent, TableViewer viewer) {
+        createColumns(parent, viewer);
+        final Table table = viewer.getTable();
+        table.setHeaderVisible(true);
+        table.setLinesVisible(true);
 
+        viewer.setContentProvider(new ArrayContentProvider());
+        // get the content for the viewer, setInput will call getElements in the
+        // contentProvider
+        viewer.setInput(ModelProvider.INSTANCE.getPersons());
+        // make the selection available to other views
+        //getSite().setSelectionProvider(tableViewer);
+        // set the sorter for the table
 
-    }
-
-
-    private void createViewer(Composite parent) {
-            viewer = new TableViewer(parent, SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL | SWT.FULL_SELECTION | SWT.BORDER);
-            createColumns(parent, viewer);
-            final Table table = viewer.getTable();
-            table.setHeaderVisible(true);
-            table.setLinesVisible(true);
-
-            viewer.setContentProvider(new ArrayContentProvider());
-            // get the content for the viewer, setInput will call getElements in the
-            // contentProvider
-            viewer.setInput(ModelProvider.INSTANCE.getPersons());
-            // make the selection available to other views
-            getSite().setSelectionProvider(viewer);
-            // set the sorter for the table
-
-            // define layout for the viewer
-            GridData gridData = new GridData();
-            gridData.verticalAlignment = GridData.FILL;
-            gridData.horizontalSpan = 2;
-            gridData.grabExcessHorizontalSpace = true;
-            gridData.grabExcessVerticalSpace = true;
-            gridData.horizontalAlignment = GridData.FILL;
-            viewer.getControl().setLayoutData(gridData);
-    }
-
-    public TableViewer getViewer() {
-            return viewer;
-    }
+        // define layout for the viewer
+        GridData gridData = new GridData();
+        gridData.verticalAlignment = GridData.FILL;
+        gridData.horizontalSpan = 2;
+        gridData.grabExcessHorizontalSpace = true;
+        gridData.grabExcessVerticalSpace = true;
+        gridData.horizontalAlignment = GridData.FILL;
+        viewer.getControl().setLayoutData(gridData);
+	}
 
     // create the columns for the table
     private void createColumns(final Composite parent, final TableViewer viewer) {
-            String[] titles = { "First name", "Last name", "Gender", "Married" };
+            String[] titles = { "First name", "Last name", "Gender"};
             int[] bounds = { 100, 100, 100, 100 };
 
             // first column is for the first name
-            TableViewerColumn col = createTableViewerColumn(titles[0], bounds[0], 0);
+            TableViewerColumn col = createTableViewerColumn(viewer, titles[0], bounds[0], 0);
             col.setLabelProvider(new ColumnLabelProvider() {
                     @Override
                     public String getText(Object element) {
@@ -139,8 +210,8 @@ public class WSDLAnalyzer{
             });
 
             // second column is for the last name
-            col = createTableViewerColumn(titles[1], bounds[1], 1);
-            col.setLabelProvider(new ColumnLabelProvider() {
+            TableViewerColumn col1 = createTableViewerColumn(viewer, titles[1], bounds[1], 1);
+            col1.setLabelProvider(new ColumnLabelProvider() {
                     @Override
                     public String getText(Object element) {
                             Person p = (Person) element;
@@ -149,8 +220,8 @@ public class WSDLAnalyzer{
             });
 
             // now the gender
-            col = createTableViewerColumn(titles[2], bounds[2], 2);
-            col.setLabelProvider(new ColumnLabelProvider() {
+            TableViewerColumn col2 = createTableViewerColumn(viewer, titles[2], bounds[2], 2);
+            col2.setLabelProvider(new ColumnLabelProvider() {
                     @Override
                     public String getText(Object element) {
                             Person p = (Person) element;
@@ -158,27 +229,9 @@ public class WSDLAnalyzer{
                     }
             });
 
-            // now the status married
-            col = createTableViewerColumn(titles[3], bounds[3], 3);
-            col.setLabelProvider(new ColumnLabelProvider() {
-                    @Override
-                    public String getText(Object element) {
-                            return null;
-                    }
-
-                    @Override
-                    public Image getImage(Object element) {
-                            if (((Person) element).isMarried()) {
-                                    return CHECKED;
-                            } else {
-                                    return UNCHECKED;
-                            }
-                    }
-            });
-
     }
 
-    private TableViewerColumn createTableViewerColumn(String title, int bound, final int colNumber) {
+    private TableViewerColumn createTableViewerColumn(TableViewer viewer, String title, int bound, final int colNumber) {
             final TableViewerColumn viewerColumn = new TableViewerColumn(viewer, SWT.NONE);
             final TableColumn column = viewerColumn.getColumn();
             column.setText(title);
@@ -190,30 +243,7 @@ public class WSDLAnalyzer{
     
 	@Focus
 	public void setFocus() {
-		// TODO Auto-generated method stub
+		//tableViewer.getControl().setFocus();
 		
 	}
-	
-	// nat table
-    
-    // property names of the Person class
-//       String[] propertyNames = {"firstName", "lastName", "gender", "married", "birthday"};
-//
-//       // create the data provider
-//       IColumnPropertyAccessor<Person> columnPropertyAccessor = new ReflectiveColumnPropertyAccessor<Person>(propertyNames);
-//       PersonService personService = new PersonService();
-//		IDataProvider bodyDataProvider = new ListDataProvider<Person>(personService.getPersons(10), columnPropertyAccessor);
-//
-//       final DataLayer bodyDataLayer = new DataLayer(bodyDataProvider);
-//
-//       // use different style bits to avoid rendering of inactive scrollbars for small table
-//       // Note: The enabling/disabling and showing of the scrollbars is handled by the ViewportLayer.
-//       //                Without the ViewportLayer the scrollbars will always be visible with the default
-//       //                style bits of NatTable.
-//       final NatTable natTable = new NatTable(
-//                       parent,
-//                       SWT.NO_REDRAW_RESIZE | SWT.DOUBLE_BUFFERED | SWT.BORDER,
-//                       bodyDataLayer);
-
-      // GridDataFactory.fillDefaults().grab(true, true).applyTo(natTable);
 }

@@ -25,7 +25,15 @@ public class Person {
             this.married = married;
     }
 
-    public void addPropertyChangeListener(String propertyName,
+    public Person(String firstName, String lastName) {
+        super();
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.gender = "";
+        this.married = false;
+	}
+
+	public void addPropertyChangeListener(String propertyName,
                     PropertyChangeListener listener) {
             propertyChangeSupport.addPropertyChangeListener(propertyName, listener);
     }

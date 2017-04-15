@@ -6,6 +6,7 @@ package org.governance.ea.platform.util;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
@@ -47,7 +48,7 @@ public class GridViewUtil {
 		return files;
 	}
 
-	public static List<WSDLServiceModel> getViewerModel(List<WSDLServiceModel> wsdlServiceModel) {
+	public static List<WSDLServiceModel> getViewerModel(List<WSDLServiceModel> reqWSDLServiceModelList) {
 	
 		System.out.println("File Parsing Started.....");
 		WSDLParser parser = new WSDLParser();
@@ -70,82 +71,65 @@ public class GridViewUtil {
 			} catch (Exception e) {
 				folderName = "--N/A--";
 			} 
-			//tableModel.addRow(convertDefinitiontoTableModel(name, folderName, tableModel, defs));
-			wsdlServiceModel.add(getWSDLServiceModel(name, folderName,new WSDLServiceModel(), defs));
-			// break;
+			reqWSDLServiceModelList.addAll(getWSDLServiceModel(name, folderName, defs));
 		}
 
 		System.out.println("File Parse Finished.....");
 
-		return wsdlServiceModel;
+		return reqWSDLServiceModelList;
 	}
 
-	private static WSDLServiceModel getWSDLServiceModel(String name, String folderName,
-			WSDLServiceModel wsdlServiceModel, Definitions defs) {
+	private static List<WSDLServiceModel> getWSDLServiceModel(String name, String folderName,
+			Definitions defs) {
 		
-		wsdlServiceModel.setProcessName(folderName);
-		
-		// add wsdl name
-		wsdlServiceModel.setWsdlName(name + ".WSDL");
+		// create List of model name		
+		List <WSDLServiceModel> wsdlServiceModelList = new ArrayList<WSDLServiceModel>();
 		
 		// add service name
-		StringBuilder serviceListString = new StringBuilder("S: ");
-		StringBuilder portListString = new StringBuilder("Port :");
-		StringBuilder bindingOperationListString = new StringBuilder(" Ops : ");
-		StringBuilder opsInputListString = new StringBuilder("Input : ");
-		StringBuilder opsOutputListString = new StringBuilder("Output : ");
+//		StringBuilder serviceListString = new StringBuilder("S: ");
+//		StringBuilder portListString = new StringBuilder("Port :");
+//		StringBuilder bindingOperationListString = new StringBuilder(" Ops : ");
+//		StringBuilder opsInputListString = new StringBuilder("Input : ");
+//		StringBuilder opsOutputListString = new StringBuilder("Output : ");
 
+		
 		for (Service serv : defs.getServices()) {
-			serviceListString.append(serv.getName() + "\n");
+			//serviceListString.append(serv.getName() + "\n");
 
 			// add ports
 			for (Port port : serv.getPorts()) {
 				try {
-					portListString.append(port.getName() + "\n ");// + "\n -
-																	// PBinding"
-																	// +
-																	// port.getBinding().getName()
-																	// + "\n");
+					//portListString.append(port.getName() + "\n ");
+					// + "\n - PBinding" + port.getBinding().getName() + "\n");
 
 					// add operations
-					for (Operation ops : port.getBinding().getPortType().getOperations()) {// BindingOperation
-																							// bdngOps
-																							// :
-																							// port.getBinding().getOperations())
-																							// {
-						bindingOperationListString.append(ops.getName() + "\n");
+					for (Operation ops : port.getBinding().getPortType().getOperations()) {
+						
+						// BindingOperation bdngOps : port.getBinding().getOperations()) {
+						//bindingOperationListString.append(ops.getName() + "\n");
 
-						// add Input
-						// opsInputListString.append(ops.getInput().getName()+"\n");
-						// for(Part parts :
-						// ops.getInput().getMessage().getParts()){
-						// parts.getElement().
-						// }
-
-						// add Output
-						// opsOutputListString.append(bdngOps.getOutput().getName()+"\n");
+						WSDLServiceModel wsdlServiceModel = new WSDLServiceModel();
+						// add process name		
+						wsdlServiceModel.setProcessName(folderName);
+						
+						// add wsdl name
+						wsdlServiceModel.setWsdlName(name);						
+						wsdlServiceModel.setServiceName(serv.getName());
+						wsdlServiceModel.setPortBinding(port.getName());
+						wsdlServiceModel.setOperationName(ops.getName());
+						wsdlServiceModel.setRequestName(ops.getInput().getMessage().getName());//getName());
+						wsdlServiceModel.setResponseName(ops.getOutput().getMessage().getName());
+						
+						wsdlServiceModelList.add(wsdlServiceModel);
 					}
 				} catch (Exception ex) {
-					portListString.append("N/A");
-					bindingOperationListString.append("N/A" + "\n");
+					//portListString.append("N/A");
+					//bindingOperationListString.append("N/A" + "\n");
 				}
-
-				// Find Binding Port type and get its operation & its input
-				// output
-
-				// PortType portType =
-				// port.getBinding().getPortType().getOperations();
-
 			}
 		}
 
-		wsdlServiceModel.setServiceName(serviceListString.toString());
-		//wsdlServiceModel.add(portListString.toString());
-		wsdlServiceModel.setOperationName(bindingOperationListString.toString());
-		wsdlServiceModel.setRequestName(opsInputListString.toString());
-		wsdlServiceModel.setResponseName(opsOutputListString.toString());
-		
-		return wsdlServiceModel;
+		return wsdlServiceModelList;
 	}
 
 	/**

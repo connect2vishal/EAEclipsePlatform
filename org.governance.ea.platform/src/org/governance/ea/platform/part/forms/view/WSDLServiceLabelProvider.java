@@ -49,12 +49,15 @@ public class WSDLServiceLabelProvider extends LabelProvider implements ITableLab
 			text = wsdlServiceModel.getServiceName();
 			break;
 		case 3:
-			text = wsdlServiceModel.getOperationName();
+			text = wsdlServiceModel.getPortBinding();
 			break;
 		case 4:
-			text = wsdlServiceModel.getRequestName();
+			text = wsdlServiceModel.getOperationName();
 			break;
 		case 5:
+			text = wsdlServiceModel.getRequestName();
+			break;
+		case 6:
 			text = wsdlServiceModel.getResponseName();
 			break;
 		}

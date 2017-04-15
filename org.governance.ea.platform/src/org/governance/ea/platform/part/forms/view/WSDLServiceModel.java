@@ -11,21 +11,23 @@ public class WSDLServiceModel {
 
 	private String processName;
 	private String wsdlName;
-	private String ServiceName;
-	private String OperationName;
-	private String RequestName;
-	private String ResponseName;
+	private String serviceName;
+	private String portBinding;
+	private String operationName;
+	private String requestName;
+	private String responseName;
 	private PropertyChangeSupport propertyChangeSupport = new PropertyChangeSupport(this);
 
-	public WSDLServiceModel(String processName, String wsdlName, String serviceName, String operationName,
+	public WSDLServiceModel(String processName, String wsdlName, String serviceName, String portBinding, String operationName,
 			String requestName, String responseName) {
 		super();
 		this.processName = processName;
 		this.wsdlName = wsdlName;
-		ServiceName = serviceName;
-		OperationName = operationName;
-		RequestName = requestName;
-		ResponseName = responseName;
+		this.serviceName = serviceName;
+		this.portBinding = portBinding;
+		this.operationName = operationName;
+		this.requestName = requestName;
+		this.responseName = responseName;
 	}
 
 	public void addPropertyChangeListener(String propertyName, PropertyChangeListener listener) {
@@ -58,35 +60,43 @@ public class WSDLServiceModel {
 	}
 
 	public String getServiceName() {
-		return ServiceName;
+		return this.serviceName;
 	}
 
 	public void setServiceName(String serviceName) {
-		ServiceName = serviceName;
+		this.serviceName = serviceName;
 	}
 
 	public String getOperationName() {
-		return OperationName;
+		return this.operationName;
 	}
 
 	public void setOperationName(String operationName) {
-		OperationName = operationName;
+		this.operationName = operationName;
 	}
 
 	public String getRequestName() {
-		return RequestName;
+		return this.requestName;
 	}
 
 	public void setRequestName(String requestName) {
-		RequestName = requestName;
+		this.requestName = requestName;
 	}
 
 	public String getResponseName() {
-		return ResponseName;
+		return this.responseName;
 	}
 
 	public void setResponseName(String responseName) {
-		ResponseName = responseName;
+		this.responseName = responseName;
+	}
+
+	public String getPortBinding() {
+		return portBinding;
+	}
+
+	public void setPortBinding(String portBinding) {
+		this.portBinding = portBinding;
 	}
 
 }

@@ -167,6 +167,11 @@ public class WSDLAnalyzer{
             tclWSDLViewerComposite.setColumnData(tcServiceName, new ColumnPixelData(200, true, true));            
             tcServiceName.setText("Service Name");
             
+            TableViewerColumn tvcPortBindName = new TableViewerColumn(tableViewer, SWT.LEFT);
+            TableColumn tcPortBindName = tvcPortBindName.getColumn();
+            tclWSDLViewerComposite.setColumnData(tcPortBindName, new ColumnPixelData(250, true, true));            
+            tcPortBindName.setText("Port Binding Name");            
+            
             TableViewerColumn tvcOperationName = new TableViewerColumn(tableViewer, SWT.LEFT);
             TableColumn tcOperationName = tvcOperationName.getColumn();
             tclWSDLViewerComposite.setColumnData(tcOperationName, new ColumnPixelData(250, true, true));            

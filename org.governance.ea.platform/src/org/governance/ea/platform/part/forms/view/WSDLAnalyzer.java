@@ -1,4 +1,3 @@
- 
 package org.governance.ea.platform.part.forms.view;
 
 import javax.annotation.PostConstruct;
@@ -21,12 +20,18 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
+import org.eclipse.ui.forms.events.ExpansionAdapter;
+import org.eclipse.ui.forms.events.ExpansionEvent;
+import org.eclipse.ui.forms.widgets.ColumnLayout;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.ui.forms.widgets.ScrolledForm;
 import org.eclipse.ui.forms.widgets.Section;
 import org.eclipse.wb.swt.SWTResourceManager;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
 
 public class WSDLAnalyzer{
+	
 	private static class ContentProvider implements IStructuredContentProvider {
 		public Object[] getElements(Object inputElement) {
 			return new Object[0];
@@ -36,6 +41,7 @@ public class WSDLAnalyzer{
 		public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
 		}
 	}
+	
 	private class TableLabelProvider extends LabelProvider implements ITableLabelProvider {
 		public Image getColumnImage(Object element, int columnIndex) {
 			return null;
@@ -56,6 +62,7 @@ public class WSDLAnalyzer{
 	}
 	
     public static final String ID = "org.governance.ea.platform.part.forms.view.wsdlanalyzer";
+	private TableViewer tableViewer;
     /**
      * This is a callback that will allow us to create the viewer and initialize
      * it.
@@ -66,80 +73,83 @@ public class WSDLAnalyzer{
             ScrolledForm form = toolkit.createScrolledForm(parent);
             toolkit.decorateFormHeading(form.getForm());
             form.setText("WSDL Analyzer");
-            form.getBody().setLayout(null);
+            form.getBody().setLayout(new ColumnLayout());
             
             Section sctnNewSection = toolkit.createSection(form.getBody(), Section.TWISTIE | Section.TITLE_BAR);
-            sctnNewSection.setBounds(10, 4, 1076, 155);
             toolkit.paintBordersFor(sctnNewSection);
             sctnNewSection.setText("New Section");
             sctnNewSection.setExpanded(true);
+            sctnNewSection.setSize(1020, 70);
             
-            Composite composite = new Composite(sctnNewSection, SWT.NONE);
-            toolkit.adapt(composite);
-            toolkit.paintBordersFor(composite);
-            sctnNewSection.setClient(composite);
-            composite.setLayout(new GridLayout(20, false));
+            Composite selectionComposite = new Composite(sctnNewSection, SWT.NONE);
             
-            Label lblFolderPath = new Label(composite, SWT.NONE);
+            toolkit.adapt(selectionComposite);
+            toolkit.paintBordersFor(selectionComposite);
+            sctnNewSection.setClient(selectionComposite);
+            selectionComposite.setLayout(new GridLayout(5, false));
+            
+            Label lblFolderPath = new Label(selectionComposite, SWT.NONE);
             toolkit.adapt(lblFolderPath, true, true);
             lblFolderPath.setText("Folder Path :");
             
-            Label lblNewLabel = toolkit.createLabel(composite, "Select Folder", SWT.NONE);
+            Label lblNewLabel = toolkit.createLabel(selectionComposite, "Select Folder", SWT.NONE);
             GridData gd_lblNewLabel = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
-            gd_lblNewLabel.widthHint = 578;
+            gd_lblNewLabel.widthHint = 1005;
             lblNewLabel.setLayoutData(gd_lblNewLabel);
             lblNewLabel.setBackground(SWTResourceManager.getColor(192, 192, 192));
-            new Label(composite, SWT.NONE);
-            new Label(composite, SWT.NONE);
-            new Label(composite, SWT.NONE);
-            new Label(composite, SWT.NONE);
-            new Label(composite, SWT.NONE);
-            new Label(composite, SWT.NONE);
-            new Label(composite, SWT.NONE);
-            new Label(composite, SWT.NONE);
-            new Label(composite, SWT.NONE);
-            new Label(composite, SWT.NONE);
-            new Label(composite, SWT.NONE);
-            new Label(composite, SWT.NONE);
-            new Label(composite, SWT.NONE);
-            new Label(composite, SWT.NONE);
-            new Label(composite, SWT.NONE);
-            new Label(composite, SWT.NONE);
-            new Label(composite, SWT.NONE);
             
-            Button btnSelectFolder = toolkit.createButton(composite, "Select Folder", SWT.NONE);
-            
+            Button btnSelectFolder = toolkit.createButton(selectionComposite, "Select Folder", SWT.NONE);
+            btnSelectFolder.addSelectionListener(new SelectionAdapter() {
+            	@Override
+            	public void widgetSelected(SelectionEvent e) {
+            		addNewSetDatatoTableViewer();
+            	}
+            });
+            new Label(selectionComposite, SWT.NONE);
+            new Label(selectionComposite, SWT.NONE);
+              
             Section sctnWsdlActions = toolkit.createSection(form.getBody(), Section.TWISTIE | Section.TITLE_BAR);
-            sctnWsdlActions.setBounds(10, 164, 1071, 69);
             toolkit.paintBordersFor(sctnWsdlActions);
             sctnWsdlActions.setText("WSDL Actions");
             sctnWsdlActions.setExpanded(true);
+            //sctnWsdlActions.setBounds(5, 150, 1020, 50);//Size(1020, 50);
+            //TableWrapData td = new TableWrapData(TableWrapData.FILL);
+            //td.colspan = 2;
+            //sctnWsdlActions.setLayoutData(td);
+            sctnWsdlActions.addExpansionListener(new ExpansionAdapter() {
+             public void expansionStateChanged(ExpansionEvent e) {
+              form.reflow(true);
+             }
+            });
+            
             
             Composite wsdlActionComposite = toolkit.createComposite(sctnWsdlActions, SWT.NONE);
+            wsdlActionComposite.setBounds(5, 150, 1020, 50);//Size(1020, 50);
             toolkit.paintBordersFor(wsdlActionComposite);
             sctnWsdlActions.setClient(wsdlActionComposite);
             wsdlActionComposite.setLayout(new GridLayout(1, false));
-            
+            wsdlActionComposite.setBounds(5, 150, 1020, 50);//Size(1020, 50);
+           
             Button btnAnalyze = toolkit.createButton(wsdlActionComposite, "Analyze", SWT.NONE);
             GridData gd_btnAnalyze = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
             gd_btnAnalyze.widthHint = 147;
             btnAnalyze.setLayoutData(gd_btnAnalyze);
             
             Section sctnAnalyzisView = toolkit.createSection(form.getBody(), Section.TWISTIE | Section.TITLE_BAR);
-            sctnAnalyzisView.setBounds(10, 267, 1076, 512);
             toolkit.paintBordersFor(sctnAnalyzisView);
             sctnAnalyzisView.setText("Analyzis view");
             sctnAnalyzisView.setExpanded(true);
-            
+            //sctnAnalyzisView.setSize(1020, 500);
+                        
             Composite wsdlViewerComposite = toolkit.createComposite(sctnAnalyzisView, SWT.NONE);
             toolkit.paintBordersFor(wsdlViewerComposite);
             sctnAnalyzisView.setClient(wsdlViewerComposite);
             
-            TableViewer tableViewer = new TableViewer(wsdlViewerComposite, SWT.BORDER | SWT.FULL_SELECTION);
+            tableViewer = new TableViewer(wsdlViewerComposite, SWT.BORDER | SWT.FULL_SELECTION);
             Table table = tableViewer.getTable();
             table.setBounds(0, 0, 620, 396);
             //table.setBounds(0,0,sctnAnalyzisView.getBounds().width,sctnAnalyzisView.getBounds().height);//0, 0, 620, 396);
-            //System.out.println("Size : "+sctnAnalyzisView.getBounds());
+            System.out.println("Size : "+parent.getBounds());
             table.setHeaderVisible(true);
             table.setLinesVisible(true);
             toolkit.paintBordersFor(table);
@@ -149,7 +159,7 @@ public class WSDLAnalyzer{
             tcFirstName.setWidth(100);
             tcFirstName.setText("FirstName");
             
-            TableViewerColumn tvcLastName = new TableViewerColumn(tableViewer, SWT.NONE);
+            TableViewerColumn tvcLastName = new TableViewerColumn(tableViewer, SWT.LEFT);
             TableColumn tcLastName = tvcLastName.getColumn();
             tcLastName.setWidth(100);
             tcLastName.setText("Last Name");
@@ -170,7 +180,13 @@ public class WSDLAnalyzer{
             //createViewer(parent, tableViewer);
      }
     
-    private void createViewer(Composite parent, TableViewer viewer) {
+    protected void addNewSetDatatoTableViewer() {
+		// TODO Auto-generated method stub
+        tableViewer.setInput(ModelProvider.INSTANCE.getNewPersons());
+		
+	}
+
+	private void createViewer(Composite parent, TableViewer viewer) {
         createColumns(parent, viewer);
         final Table table = viewer.getTable();
         table.setHeaderVisible(true);

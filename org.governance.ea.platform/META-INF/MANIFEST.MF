@@ -20,7 +20,8 @@ Require-Bundle: org.eclipse.core.runtime;bundle-version="3.12.0",
  org.eclipse.nebula.widgets.nattable.extension.e4;bundle-version="1.0.0",
  org.eclipse.nebula.widgets.nattable.extension.glazedlists;bundle-version="1.4.0",
  org.eclipse.nebula.widgets.nattable.extension.nebula;bundle-version="1.0.0",
- org.eclipse.nebula.widgets.nattable.extension.poi;bundle-version="1.4.0"
+ org.eclipse.nebula.widgets.nattable.extension.poi;bundle-version="1.4.0",
+ org.governance.ea.libs;bundle-version="1.0.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Import-Package: javax.annotation;version="1.0.0";resolution:=optional,
  javax.inject;version="1.0.0"

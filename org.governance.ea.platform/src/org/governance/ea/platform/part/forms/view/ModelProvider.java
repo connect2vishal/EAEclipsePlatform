@@ -32,9 +32,9 @@ public enum ModelProvider {
         persons = new ArrayList<Person>();
         persons.add(new Person("Vishal", "Zufall"));//, "male", true));
         persons.add(new Person("Vishu", "Babbel"));//, "male", true));
-        persons.add(new Person("Marie", "Dortmund"));//, "female", false));
-        persons.add(new Person("Holger", "Adams"));//, "male", true));
-        persons.add(new Person("Juliane", "Adams"));//, "female", true));
+        //persons.add(new Person("Marie", "Dortmund"));//, "female", false));
+        //persons.add(new Person("Holger", "Adams"));//, "male", true));
+        //persons.add(new Person("Juliane", "Adams"));//, "female", true));
         return persons;
 	}
 

@@ -29,43 +29,24 @@ import org.eclipse.ui.forms.widgets.Section;
 import org.eclipse.wb.swt.SWTResourceManager;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.jface.layout.TableColumnLayout;
+import org.eclipse.jface.viewers.ColumnPixelData;
 
 public class WSDLAnalyzer{
 	
-	private static class ContentProvider implements IStructuredContentProvider {
-		public Object[] getElements(Object inputElement) {
-			return new Object[0];
-		}
-		public void dispose() {
-		}
-		public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
-		}
-	}
-	
-	private class TableLabelProvider extends LabelProvider implements ITableLabelProvider {
-		public Image getColumnImage(Object element, int columnIndex) {
-			return null;
-		}
-		public String getColumnText(Object element, int columnIndex) {
-			Person person = (Person) element;
-		    String text = "";
-		    switch (columnIndex) {
-		    case PersonConst.COLUMN_FIRST_NAME:
-		      text = person.getFirstName();
-		      break;
-		    case PersonConst.COLUMN_LAST_NAME:
-		      text = person.getLastName();
-		      break;		   
-		    }
-		    return text;
-		 }
-	}
-	
     public static final String ID = "org.governance.ea.platform.part.forms.view.wsdlanalyzer";
 	private TableViewer tableViewer;
+	private Table table_1;
+	private Table table_2;
     /**
      * This is a callback that will allow us to create the viewer and initialize
      * it.
+     */
+    /**
+     * @param parent
+     */
+    /**
+     * @param parent
      */
     @PostConstruct
     public void createPartControl(Composite parent) {
@@ -131,42 +112,79 @@ public class WSDLAnalyzer{
             wsdlActionComposite.setBounds(5, 150, 1020, 50);//Size(1020, 50);
            
             Button btnAnalyze = toolkit.createButton(wsdlActionComposite, "Analyze", SWT.NONE);
+            btnAnalyze.addSelectionListener(new SelectionAdapter() {
+            	@Override
+            	public void widgetSelected(SelectionEvent e) {
+            		addNewSetDatatoTableViewer();
+            	}
+            });
             GridData gd_btnAnalyze = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
             gd_btnAnalyze.widthHint = 147;
             btnAnalyze.setLayoutData(gd_btnAnalyze);
+            
+            /*Composite composite = new Composite(form.getBody(), SWT.NONE);
+            toolkit.adapt(composite);
+            toolkit.paintBordersFor(composite);
+            composite.setLayout(new TableColumnLayout());
+            
+            TableViewer tableViewer_1 = new TableViewer(composite, SWT.BORDER | SWT.FULL_SELECTION);
+            table_1 = tableViewer_1.getTable();
+            table_1.setHeaderVisible(true);
+            table_1.setLinesVisible(true);
+            toolkit.paintBordersFor(table_1);*/
             
             Section sctnAnalyzisView = toolkit.createSection(form.getBody(), Section.TWISTIE | Section.TITLE_BAR);
             toolkit.paintBordersFor(sctnAnalyzisView);
             sctnAnalyzisView.setText("Analyzis view");
             sctnAnalyzisView.setExpanded(true);
-            //sctnAnalyzisView.setSize(1020, 500);
-                        
-            Composite wsdlViewerComposite = toolkit.createComposite(sctnAnalyzisView, SWT.NONE);
+            
+            Composite wsdlViewerComposite = new Composite(sctnAnalyzisView, SWT.NONE);
+            toolkit.adapt(wsdlViewerComposite);
             toolkit.paintBordersFor(wsdlViewerComposite);
             sctnAnalyzisView.setClient(wsdlViewerComposite);
+            TableColumnLayout tclWSDLViewerComposite = new TableColumnLayout();
+            wsdlViewerComposite.setLayout(tclWSDLViewerComposite);
             
             tableViewer = new TableViewer(wsdlViewerComposite, SWT.BORDER | SWT.FULL_SELECTION);
             Table table = tableViewer.getTable();
             table.setBounds(0, 0, 620, 396);
-            //table.setBounds(0,0,sctnAnalyzisView.getBounds().width,sctnAnalyzisView.getBounds().height);//0, 0, 620, 396);
-            System.out.println("Size : "+parent.getBounds());
             table.setHeaderVisible(true);
             table.setLinesVisible(true);
             toolkit.paintBordersFor(table);
+             
+            TableViewerColumn tvcProcessName = new TableViewerColumn(tableViewer, SWT.LEFT);
+            TableColumn tcProcessName = tvcProcessName.getColumn();
+            tclWSDLViewerComposite.setColumnData(tcProcessName, new ColumnPixelData(250, true, true));            
+            tcProcessName.setText("Process Name");
             
-            TableViewerColumn tvcFirstName = new TableViewerColumn(tableViewer, SWT.LEFT);
-            TableColumn tcFirstName = tvcFirstName.getColumn();
-            tcFirstName.setWidth(100);
-            tcFirstName.setText("FirstName");
+            TableViewerColumn tvcWSDLName = new TableViewerColumn(tableViewer, SWT.LEFT);
+            TableColumn tcWSDLName = tvcWSDLName.getColumn();
+            tclWSDLViewerComposite.setColumnData(tcWSDLName, new ColumnPixelData(200, true, true));            
+            tcWSDLName.setText("WSDL Name");
             
-            TableViewerColumn tvcLastName = new TableViewerColumn(tableViewer, SWT.LEFT);
-            TableColumn tcLastName = tvcLastName.getColumn();
-            tcLastName.setWidth(100);
-            tcLastName.setText("Last Name");
+            TableViewerColumn tvcServiceName = new TableViewerColumn(tableViewer, SWT.LEFT);
+            TableColumn tcServiceName = tvcServiceName.getColumn();
+            tclWSDLViewerComposite.setColumnData(tcServiceName, new ColumnPixelData(200, true, true));            
+            tcServiceName.setText("Service Name");
             
-             tableViewer.setLabelProvider(new TableLabelProvider());
+            TableViewerColumn tvcOperationName = new TableViewerColumn(tableViewer, SWT.LEFT);
+            TableColumn tcOperationName = tvcOperationName.getColumn();
+            tclWSDLViewerComposite.setColumnData(tcOperationName, new ColumnPixelData(250, true, true));            
+            tcOperationName.setText("Operation Name");
+            
+            TableViewerColumn tvcRequestName = new TableViewerColumn(tableViewer, SWT.LEFT);
+            TableColumn tcRequestName = tvcRequestName.getColumn();
+            tclWSDLViewerComposite.setColumnData(tcRequestName, new ColumnPixelData(300, true, true));            
+            tcRequestName.setText("Request Name");
+            
+            TableViewerColumn tvcResponseName = new TableViewerColumn(tableViewer, SWT.LEFT);
+            TableColumn tcResponseName = tvcResponseName.getColumn();
+            tclWSDLViewerComposite.setColumnData(tcResponseName, new ColumnPixelData(300, true, true));            
+            tcResponseName.setText("Response Name");
+            
+             tableViewer.setLabelProvider(new WSDLServiceLabelProvider());
              tableViewer.setContentProvider(new ArrayContentProvider());
-             tableViewer.setInput(ModelProvider.INSTANCE.getPersons());
+             tableViewer.setInput(WSDLServiceModelProvider.INSTANCE.getWsdlServiceModel());
            
              // define layout for the viewer
              GridData gridData = new GridData();
@@ -175,87 +193,18 @@ public class WSDLAnalyzer{
              gridData.grabExcessHorizontalSpace = true;
              gridData.grabExcessVerticalSpace = true;
              gridData.horizontalAlignment = GridData.FILL;
-             tableViewer.getControl().setLayoutData(gridData);
+             //tableViewer.getControl().setLayoutData(gridData);
              
             //createViewer(parent, tableViewer);
      }
     
     protected void addNewSetDatatoTableViewer() {
 		// TODO Auto-generated method stub
-        tableViewer.setInput(ModelProvider.INSTANCE.getNewPersons());
+        tableViewer.setInput(WSDLServiceModelProvider.INSTANCE.getDatafromFiles());
+        		//ModelProvider.INSTANCE.getNewPersons());
 		
 	}
 
-	private void createViewer(Composite parent, TableViewer viewer) {
-        createColumns(parent, viewer);
-        final Table table = viewer.getTable();
-        table.setHeaderVisible(true);
-        table.setLinesVisible(true);
-
-        viewer.setContentProvider(new ArrayContentProvider());
-        // get the content for the viewer, setInput will call getElements in the
-        // contentProvider
-        viewer.setInput(ModelProvider.INSTANCE.getPersons());
-        // make the selection available to other views
-        //getSite().setSelectionProvider(tableViewer);
-        // set the sorter for the table
-
-        // define layout for the viewer
-        GridData gridData = new GridData();
-        gridData.verticalAlignment = GridData.FILL;
-        gridData.horizontalSpan = 2;
-        gridData.grabExcessHorizontalSpace = true;
-        gridData.grabExcessVerticalSpace = true;
-        gridData.horizontalAlignment = GridData.FILL;
-        viewer.getControl().setLayoutData(gridData);
-	}
-
-    // create the columns for the table
-    private void createColumns(final Composite parent, final TableViewer viewer) {
-            String[] titles = { "First name", "Last name", "Gender"};
-            int[] bounds = { 100, 100, 100, 100 };
-
-            // first column is for the first name
-            TableViewerColumn col = createTableViewerColumn(viewer, titles[0], bounds[0], 0);
-            col.setLabelProvider(new ColumnLabelProvider() {
-                    @Override
-                    public String getText(Object element) {
-                            Person p = (Person) element;
-                            return p.getFirstName();
-                    }
-            });
-
-            // second column is for the last name
-            TableViewerColumn col1 = createTableViewerColumn(viewer, titles[1], bounds[1], 1);
-            col1.setLabelProvider(new ColumnLabelProvider() {
-                    @Override
-                    public String getText(Object element) {
-                            Person p = (Person) element;
-                            return p.getLastName();
-                    }
-            });
-
-            // now the gender
-            TableViewerColumn col2 = createTableViewerColumn(viewer, titles[2], bounds[2], 2);
-            col2.setLabelProvider(new ColumnLabelProvider() {
-                    @Override
-                    public String getText(Object element) {
-                            Person p = (Person) element;
-                            return p.getGender();
-                    }
-            });
-
-    }
-
-    private TableViewerColumn createTableViewerColumn(TableViewer viewer, String title, int bound, final int colNumber) {
-            final TableViewerColumn viewerColumn = new TableViewerColumn(viewer, SWT.NONE);
-            final TableColumn column = viewerColumn.getColumn();
-            column.setText(title);
-            column.setWidth(bound);
-            column.setResizable(true);
-            column.setMoveable(true);
-            return viewerColumn;
-    }
     
 	@Focus
 	public void setFocus() {

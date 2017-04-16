@@ -3,16 +3,14 @@ package org.governance.ea.platform.part.forms.view;
 import javax.annotation.PostConstruct;
 
 import org.eclipse.e4.ui.di.Focus;
+import org.eclipse.jface.layout.TableColumnLayout;
 import org.eclipse.jface.viewers.ArrayContentProvider;
-import org.eclipse.jface.viewers.ColumnLabelProvider;
-import org.eclipse.jface.viewers.IStructuredContentProvider;
-import org.eclipse.jface.viewers.ITableLabelProvider;
-import org.eclipse.jface.viewers.LabelProvider;
+import org.eclipse.jface.viewers.ColumnPixelData;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
-import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
@@ -27,17 +25,11 @@ import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.ui.forms.widgets.ScrolledForm;
 import org.eclipse.ui.forms.widgets.Section;
 import org.eclipse.wb.swt.SWTResourceManager;
-import org.eclipse.swt.events.SelectionAdapter;
-import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.jface.layout.TableColumnLayout;
-import org.eclipse.jface.viewers.ColumnPixelData;
 
 public class WSDLAnalyzer{
 	
     public static final String ID = "org.governance.ea.platform.part.forms.view.wsdlanalyzer";
 	private TableViewer tableViewer;
-	private Table table_1;
-	private Table table_2;
     /**
      * This is a callback that will allow us to create the viewer and initialize
      * it.
@@ -108,7 +100,7 @@ public class WSDLAnalyzer{
             wsdlActionComposite.setBounds(5, 150, 1020, 50);//Size(1020, 50);
             toolkit.paintBordersFor(wsdlActionComposite);
             sctnWsdlActions.setClient(wsdlActionComposite);
-            wsdlActionComposite.setLayout(new GridLayout(1, false));
+            wsdlActionComposite.setLayout(new GridLayout(2, false));
             wsdlActionComposite.setBounds(5, 150, 1020, 50);//Size(1020, 50);
            
             Button btnAnalyze = toolkit.createButton(wsdlActionComposite, "Analyze", SWT.NONE);
@@ -121,6 +113,8 @@ public class WSDLAnalyzer{
             GridData gd_btnAnalyze = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
             gd_btnAnalyze.widthHint = 147;
             btnAnalyze.setLayoutData(gd_btnAnalyze);
+            
+            Button btnGeneratexml = toolkit.createButton(wsdlActionComposite, "GenerateXML", SWT.NONE);
             
             /*Composite composite = new Composite(form.getBody(), SWT.NONE);
             toolkit.adapt(composite);

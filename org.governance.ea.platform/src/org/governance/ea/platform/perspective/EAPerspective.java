@@ -1,5 +1,7 @@
 package org.governance.ea.platform.perspective;
 
+import javax.annotation.PostConstruct;
+
 import org.eclipse.ui.IPageLayout;
 import org.eclipse.ui.IPerspectiveFactory;
 
@@ -8,14 +10,15 @@ public class EAPerspective implements IPerspectiveFactory {
 	/**
 	 * Creates the initial layout for a page.
 	 */
+    @PostConstruct
 	public void createInitialLayout(IPageLayout layout) {
 		String editorArea = layout.getEditorArea();
 		addFastViews(layout);
 		addViewShortcuts(layout);
 		addPerspectiveShortcuts(layout);
-		layout.addView("org.governance.ea.platform.parts.soa.WSDLAnalyzerPartView", IPageLayout.LEFT, 0.33f, IPageLayout.ID_EDITOR_AREA);
 		layout.addView("org.governance.ea.platform.parts.soa.EANavigatorPartView", IPageLayout.RIGHT, 0.5f, IPageLayout.ID_EDITOR_AREA);
 		layout.addView("org.governance.ea.platform.parts.soa.SOAEditorPartView", IPageLayout.BOTTOM, 0.5f, IPageLayout.ID_EDITOR_AREA);
+		layout.addView("org.governance.ea.platform.parts.soa.WSDLAnalyzerPartView", IPageLayout.LEFT, 0.5f, IPageLayout.ID_EDITOR_AREA);
 	}
 
 	/**

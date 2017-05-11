@@ -48,7 +48,10 @@ import com.predic8.wsdl.WSDLParser;
 public class GridViewUtil {
 
 	private static void printWSDLSchema(Schema schema){
-        out("-------------- Schema Information --------------");
+
+		out("=============================================== I am back again==========================");
+		
+		out("-------------- Schema Information --------------");
         out("  Schema TargetNamespace: " + schema.getTargetNamespace());
         out("  AttributeFormDefault: " + schema.getAttributeFormDefault());
         out("  ElementFormDefault: " + schema.getElementFormDefault());
@@ -82,25 +85,42 @@ public class GridViewUtil {
 //                out("    Element Type Name: " + schema.getType(e.getType()).getName());
 //                out("    Element minoccurs: " + e.getMinOccurs());
 //                out("    Element maxoccurs: " + e.getMaxOccurs());
-            	out("      "+ e.getClass().getSimpleName() +"< " + schema.getType(e.getType()).getName() +" : "+ e.getName() +" >");
+            	out("      "+ e.getClass().getSimpleName() +"< "+e.getType().getLocalPart() +" : "+ e.getName() +" >");
             	
             	//print complex Type
-                for (ComplexType ct : schema.getComplexTypes()) {
+                /*for (ComplexType ct : schema.getComplexTypes()) {
                 	if(ct.getName().equals(schema.getType(e.getType()).getName())){
                         if (ct.getModel() instanceof ModelGroup) {
                             for (SchemaComponent sc : ((ModelGroup) ct.getModel()).getParticles()) {
-                            	out("      "+sc.getClass().getSimpleName() +"[ "+ schema.getType(e.getType()).getName() +" ] < " + ((Element)sc).getType().getLocalPart() +" : "+sc.getName() +" >");
+                            	out("      "+sc.getClass().getSimpleName() +"[ "+ e.getType().getLocalPart() +" ] < " + e.getType().getLocalPart() +" : "+sc.getName() +" >");
+                            	//schema.getType(e.getType()).getName()
                             }
                         }
                 		
                 	}
-                }
+                }*/
             	if (e.getAnnotation() != null)
                     annotationOut(e);
             }
         }
+        
+        
+       out("");
+       StringBuilder elementTraverse = new StringBuilder(); 
+       out(" Schema traversing ");
+
+       for (Element e1 : schema.getAllElements()) { 
+        	if (e1.getType() != null) {
+        		elementTraverse = new StringBuilder();
+        		elementTraverse.append(e1.getName());
+        		//elementTraverse.append(printComplexTypeAsString(elementTraverse, schema, e));
+        	}
+       }
+        
+       out("Elements >> " + elementTraverse.toString()); 
+       
         out("");
- 
+        
         out("  Schema ComplexTypes: ");
         for (ComplexType ct : schema.getComplexTypes()) {
             out("    ComplexType Name: " + ct.getName());
@@ -161,7 +181,25 @@ public class GridViewUtil {
         }
     }
  
-    private static void annotationOut(SchemaComponent sc) {
+    private static StringBuilder printComplexTypeAsString(StringBuilder elementTraverse, Schema schema, Element e) {
+    	//print complex Type
+        for (ComplexType ct : schema.getComplexTypes()) {
+        	if(ct.getName().equals(schema.getType(e.getType()).getName())){
+                if (ct.getModel() instanceof ModelGroup) {
+                    for (SchemaComponent sc : ((ModelGroup) ct.getModel()).getParticles()) {
+                    	//if(sc.getComplexTypes())
+                    	elementTraverse.append(" >> "+e.getType().getLocalPart());
+                    	//out("      "+sc.getClass().getSimpleName() +"[ "+ e.getType().getLocalPart() +" ] < " + e.getType().getLocalPart() +" : "+sc.getName() +" >");
+                    	//schema.getType(e.getType()).getName()
+                    }
+                }
+        		
+        	}
+        }
+		return elementTraverse.append(printComplexTypeAsString(elementTraverse, schema, e));
+	}
+
+	private static void annotationOut(SchemaComponent sc) {
         if (sc.getAnnotation().getAppinfos().size() > 0) {
             System.out
                 .print("    Annotation (appinfos) available with the content: ");
@@ -286,10 +324,12 @@ public class GridViewUtil {
 			}
 		};
 
+		out(">>>>>> ===== Printing the File >>>>>>>>>>>> =========");
 		List<File> files = (List<File>) FileUtils.listFiles(wsdlDirectory, extensions, true);// ,
 																								// TrueFileFilter.INSTANCE);
 
-		// File[] files = f.listFiles(textFilter);
+		//File[] files = f.listFiles(textFilter);
+		
 		return files;
 	}
 
@@ -318,7 +358,7 @@ public class GridViewUtil {
 			} 
 			//printWSDL(defs);
 			reqWSDLServiceModelList.addAll(getWSDLServiceModel(name, folderName, defs));
-			if(name.equals("BLZService.wsdl"))	break;
+			//if(name.equals("BLZService.wsdl"))	break;
 		}
 
 		System.out.println("File Parse Finished.....");
@@ -381,7 +421,12 @@ public class GridViewUtil {
 	    for (Schema schema : defs.getSchemas()) {
 	    	
 	    	printWSDLSchema(schema);
-	    	
+
+//	        for (Element e : schema.getAllElements()) {
+//	            if (e.getType() != null) {
+//	            	out("      "+ e.getClass().getSimpleName() +"< "+e.getType().getLocalPart() +" : "+ e.getName() +" >");
+//	            }
+//	        }
 //	        System.out.println("  TargetNamespace: \t" + schema.getTargetNamespace());
 //	        for (Element element : schema.getAllElements()){
 //	        	System.out.println("   Element: \t" + element.getName() );
